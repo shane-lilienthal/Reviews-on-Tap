@@ -7,6 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/style.css"/>
 <title>Insert title here</title>
 </head>
 <body>
@@ -19,24 +20,12 @@
 		</div>
 		<div class="d-flex justify-content-center">
 			<div>
-				<div class="d-flex justify-content-center">
-					<h3>Log In</h3>
-				</div>
-				<form:form action="/users/login" method="POST" modelAttribute="user">
-					<div class="mb-3">
-						<form:label class="form-label" path="email">Email:</form:label>
-						<form:input class="form-control" type="email" path="email" />
-						<form:errors style="color: red" path="email" />
+				<c:forEach var="beer" items="${beers}">
+					<div class="d-flex align-items-center mb-4">
+						<img class="m-3" src="${beer.picture}"  /> 
+						<h1><a href="/beers/${beer.id}">${beer.name}</a></h1>
 					</div>
-					<div class="mb-3">
-						<form:label class="form-label" path="password">Password:</form:label>
-						<form:input class="form-control" type="password" path="password" />
-						<form:errors style="color: red" path="password" />
-					</div>
-					<div class="d-flex justify-content-center">
-						<button class="btn btn-primary ">Login</button>
-					</div>
-				</form:form>
+				</c:forEach>
 			</div>
 		</div>
 	</div>

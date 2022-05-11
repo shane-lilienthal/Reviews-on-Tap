@@ -7,6 +7,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shanelilienthal.soloproject.models.Beer;
 import com.shanelilienthal.soloproject.models.User;
 import com.shanelilienthal.soloproject.repositories.UserRepository;
 
@@ -36,4 +37,11 @@ public class UserService {
 		}
 		return foundUser.get();
 	}
+	
+//	Find one user
+	public User find(Long id) {
+		return this.repository.findById(id).get();
+	}
 }
+	
+

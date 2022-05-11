@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
@@ -22,17 +24,17 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Size(min = 3, max = 200)
+	@Size(min = 1, message = "A first name is required.")
 	private String firstName;
 
-	@Size(min = 3, max = 200)
+	@Size(min = 1, message = "A last name is required.")
 	private String lastName;
 
 	@Email(message = "Email is invalid.")
+	@Size(min = 1, message = "An email is required.")
 	private String email;
 
 	private String hometown;
-
 
 	@Size(min = 5, message = "Password must be at least 5 characters.")
 	private String password;
@@ -46,6 +48,15 @@ public class User {
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
+	
+    @PrePersist
+    protected void onCreate() {
+    	this.createdAt = new Date();
+    }
+    @PreUpdate
+    protected void onUpdate() {
+    	this.updatedAt = new Date();
+    }
 	
 	public User() {}
 

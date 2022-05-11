@@ -29,6 +29,8 @@ public class UserController {
 	@Autowired
 	UserRepository repository;
 	
+	
+//	Get Requests
 	@GetMapping("/login")
 	public String loginForm(@ModelAttribute("user") User user) {
 		return "login.jsp";
@@ -39,6 +41,15 @@ public class UserController {
 		return "registration.jsp";
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("user");
+		
+		return "redirect:/";
+	}
+	
+	
+//	Post Requests
 	@PostMapping("/login")
 	public String login(@Valid @ModelAttribute("user") User user, RedirectAttributes redirectAttributes, HttpSession session, Model model, BindingResult result) {
 		
@@ -46,7 +57,7 @@ public class UserController {
 	
 		if ( user != null) {
 			session.setAttribute("user", user.getId());
-			redirectAttributes.addFlashAttribute("message", String.format("Hello %s! Welcome back to Project Manager!", user.getFirstName()));
+			redirectAttributes.addFlashAttribute("message", String.format("Hello %s! Welcome back to Beer Review!", user.getFirstName()));
 			return "redirect:/user/dashboard";
 		}
 		
@@ -56,7 +67,7 @@ public class UserController {
 		}
 		
 		
-			model.addAttribute("message", "Login Failed.");
+
 			return "login.jsp";
 			
 	}
@@ -76,7 +87,7 @@ public class UserController {
 			return "registration.jsp";
 		}
 		
-		redirectAttributes.addFlashAttribute("message", "Thank you for registering for Project Manager!");
+		redirectAttributes.addFlashAttribute("message", "Thank you for registering for Beer Review!");
 		
 		this.service.create(user);
 		

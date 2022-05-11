@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="container">
-		<div class="d-flex justify-content-between">
+		<div class="d-flex justify-content-between p-3">
 			<h1>Beer Review</h1>
 			<div class="d-flex align-items-center">
 				<a href="/users/login">Already a user? Log in here!</a>
@@ -25,36 +25,36 @@
 				<form:form action="/users/register" method="POST" modelAttribute="user">
 					<div class="mb-3">
 						<form:label class="form-label" path="firstName">First Name:</form:label>
-						<form:errors path="firstName" />
 						<form:input class="form-control" type="text" path="firstName" />
+						<form:errors style="color: red" path="firstName" />
 					</div>
 					<div class="mb-3">
 						<form:label class="form-label" path="firstName">Last Name:</form:label>
-						<form:errors path="lastName" />
 						<form:input class="form-control" type="text" path="lastName" />
+						<form:errors style="color: red" path="lastName" />
 					</div>
 					<div class="mb-3">
-						<form:label class="form-label" path="hometown">Hometown:</form:label>
-						<form:errors path="hometown" />
+						<form:label class="form-label" path="hometown">Hometown:(optional)</form:label>
 						<form:input class="form-control" type="text" path="hometown" />
+						<form:errors style="color: red" path="hometown" />
 					</div>
 					<div class="mb-3">
 						<form:label class="form-label" path="email">Email:</form:label>
-						<form:errors path="email" />
 						<form:input class="form-control" type="email" path="email" />
+						<form:errors style="color: red" path="email" />
 					</div>
 					<div class="mb-3">
 						<form:label class="form-label" path="password">Password:</form:label>
-						<form:errors path="password" />
 						<form:input class="form-control" type="password" path="password" />
+						<form:errors style="color: red" path="password" />
 					</div>
 					<div class="mb-3">
 						<form:label class="form-label" path="passwordConfirm">Confirm Password:</form:label>
-						<form:errors path="passwordConfirm" />
 						<form:input class="form-control" type="password" path="passwordConfirm" />
+						<form:errors style="color: red" path="passwordConfirm" />
 					</div>
 					<div class="d-flex justify-content-center">
-						<button class="btn btn-primary ">Login</button>
+						<button class="btn btn-primary ">Register</button>
 					</div>
 				</form:form>
 			</div>
