@@ -3,11 +3,13 @@ package com.shanelilienthal.soloproject.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shanelilienthal.soloproject.models.Beer;
+
 import com.shanelilienthal.soloproject.models.User;
 import com.shanelilienthal.soloproject.repositories.UserRepository;
 
@@ -41,6 +43,11 @@ public class UserService {
 //	Find one user
 	public User find(Long id) {
 		return this.repository.findById(id).get();
+	}
+	
+	public User findCurrentUser(HttpSession session) {
+		if (session.getAttribute("user") == null) return null;
+		return this.find((Long) session.getAttribute("user")); 
 	}
 }
 	

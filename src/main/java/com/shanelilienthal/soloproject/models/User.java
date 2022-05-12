@@ -1,12 +1,15 @@
 package com.shanelilienthal.soloproject.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -41,7 +44,7 @@ public class User {
 
 	@Transient
 	private String passwordConfirm;
-
+	
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
@@ -49,14 +52,19 @@ public class User {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
 	
-    @PrePersist
-    protected void onCreate() {
-    	this.createdAt = new Date();
-    }
-    @PreUpdate
-    protected void onUpdate() {
-    	this.updatedAt = new Date();
-    }
+	@PrePersist
+	protected void onCreate() {
+		this.createdAt = new Date();
+	}
+	@PreUpdate
+	protected void onUpdate() {
+		this.updatedAt = new Date();
+	}
+	
+//	Database Relationships
+    @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+    private List<Review> reviews;
+
 	
 	public User() {}
 
@@ -130,6 +138,12 @@ public class User {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+	public List<Review> getReviews() {
+		return reviews;
+	}
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 	
 	

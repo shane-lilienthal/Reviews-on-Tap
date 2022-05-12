@@ -1,5 +1,6 @@
 package com.shanelilienthal.soloproject.models;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -9,38 +10,32 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Size;
 
-
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "beers")
-public class Beer {
+@Table(name = "reviews")
+public class Review {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Size(min = 1, message = "A beer name is required.")
-	private String name;
+	@DecimalMin( "0.0") @DecimalMax("5.0")
+	private double score;
 
-	@Size(min = 1, message = "A brewery name is required.")
-	private String brewery;
-
-	@Size(min = 1, message = "A beer type is required.")
-	private String type;
-
-	@DecimalMin( "0.0")
-	private double abv;
-
-	@Size(min = 3, message = "A picture of the beer is required.")
-	private String picture;
+	@Size(min = 1, message = "Some comments are required to review a beer.")
+	private String comments;
 
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -59,11 +54,16 @@ public class Beer {
     }
     
 //    Database Relationships
-    @OneToMany(mappedBy="beer", fetch = FetchType.LAZY)
-    private List<Review> reviews;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    private User user;
     
-//	Constructor, Getters, Setters
-	public Beer() {}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="beer_id")
+    private Beer beer;
+	
+//    Constructors, Getters, Setters
+	public Review() {}
 
 	public Long getId() {
 		return id;
@@ -73,46 +73,39 @@ public class Beer {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public double getScore() {
+		return score;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	
+	public void setScore(double score) {
+		this.score = score;
 	}
-
-	public String getBrewery() {
-		return brewery;
+	
+	public String getComments() {
+		return comments;
 	}
-
-	public void setBrewery(String brewery) {
-		this.brewery = brewery;
+	
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
-
-	public String getType() {
-		return type;
+	
+	public User getUser() {
+		return user;
 	}
-
-	public void setType(String type) {
-		this.type = type;
+	
+	public void setUser(User user) {
+		this.user = user;
 	}
+	
 
-	public double getAbv() {
-		return abv;
+	public Beer getBeer() {
+		return beer;
 	}
-
-	public void setAbv(double abv) {
-		this.abv = abv;
+	
+	public void setBeer(Beer beer) {
+		this.beer = beer;
 	}
-
-	public String getPicture() {
-		return picture;
-	}
-
-	public void setPicture(String picture) {
-		this.picture = picture;
-	}
-
+	
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -127,14 +120,6 @@ public class Beer {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
-	}
-	
-	public List<Review> getReviews() {
-		return reviews;
-	}
-	
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
 	}
 
 

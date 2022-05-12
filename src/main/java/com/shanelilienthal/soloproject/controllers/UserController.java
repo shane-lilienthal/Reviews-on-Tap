@@ -11,10 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.shanelilienthal.soloproject.models.Beer;
 import com.shanelilienthal.soloproject.models.User;
 import com.shanelilienthal.soloproject.repositories.UserRepository;
 import com.shanelilienthal.soloproject.services.UserService;
@@ -45,9 +47,17 @@ public class UserController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("user");
 		
-		return "redirect:/";
+		return "redirect:/users/login";
 	}
 	
+	@GetMapping("/{userId}")
+	public String viewBeer(Model model, @PathVariable("userId") Long userId, HttpSession session) {
+		User currentUser = service.find((Long) session.getAttribute("user"));
+		
+		model.addAttribute("currentUser", currentUser);
+		
+		return "viewUser.jsp";
+	}
 	
 //	Post Requests
 	@PostMapping("/login")
@@ -57,8 +67,7 @@ public class UserController {
 	
 		if ( user != null) {
 			session.setAttribute("user", user.getId());
-			redirectAttributes.addFlashAttribute("message", String.format("Hello %s! Welcome back to Beer Review!", user.getFirstName()));
-			return "redirect:/user/dashboard";
+			redirectAttributes.addFlashAttribute("message", String.format("Hello %s! Welcome back to Beer Review!", user.getFirstName()));	
 		}
 		
 		if (result.hasErrors()) {
@@ -67,9 +76,7 @@ public class UserController {
 		}
 		
 		
-
-			return "login.jsp";
-			
+		return "redirect:/home";	
 	}
 	
 	@PostMapping("/register")
@@ -93,7 +100,7 @@ public class UserController {
 		
 		session.setAttribute("user", user.getId());
 		
-		return "redirect:/user/dashboard";
+		return "redirect:/home";
 	}
 
 }

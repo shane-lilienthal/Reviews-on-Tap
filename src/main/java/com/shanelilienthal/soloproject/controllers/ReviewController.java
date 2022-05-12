@@ -21,55 +21,50 @@ import com.shanelilienthal.soloproject.models.Beer;
 import com.shanelilienthal.soloproject.models.Review;
 import com.shanelilienthal.soloproject.models.User;
 import com.shanelilienthal.soloproject.repositories.BeerRepository;
-
+import com.shanelilienthal.soloproject.repositories.ReviewRepository;
 import com.shanelilienthal.soloproject.services.BeerService;
+import com.shanelilienthal.soloproject.services.ReviewService;
 import com.shanelilienthal.soloproject.services.UserService;
 
 
 @Controller
-@RequestMapping("beers")
-public class BeerController {
+@RequestMapping("reviews")
+public class ReviewController {
 	
 	@Autowired
-	BeerService service;
+	ReviewService service;
 	
 	@Autowired
 	UserService userService;
 	
 	@Autowired
-	BeerRepository repository;
+	BeerService beerService;
+	
+	@Autowired
+	ReviewRepository repository;
 	
 	
 //	Get Requests
 	
-	@GetMapping("/new")
-	public String newBeerForm(Model model, @ModelAttribute("beer") Beer beer, HttpSession session) {
-		User currentUser = userService.find((Long) session.getAttribute("user"));
+	@GetMapping("/new/{beerId}")
+	public String newReviewForm(Model model, @ModelAttribute("review") Review review, @PathVariable("beerId") Long beerId, HttpSession session) {
 		
-		model.addAttribute("currentUser", currentUser);
-		return "newBeer.jsp";
-	}
-	
-	@GetMapping("/all")
-	public String allBeers(Model model, @ModelAttribute("beer") Beer beer, HttpSession session) {
-		User currentUser = userService.find((Long) session.getAttribute("user"));
+		User currentUser = userService.find((Long)session.getAttribute("user"));
 		model.addAttribute("currentUser", currentUser);
 		
-		List<Beer> beers = service.all();
-		model.addAttribute("beers", beers);
-		return "allBeers.jsp";
-	}
-	
-	@GetMapping("/{beerId}")
-	public String viewBeer(Model model, @PathVariable("beerId") Long beerId, HttpSession session) {
-		User currentUser = userService.find((Long) session.getAttribute("user"));
-		model.addAttribute("currentUser", currentUser);
-		
-		Beer beer = service.find(beerId);
+		Beer beer = beerService.find(beerId);
 		model.addAttribute("beer", beer);
 		
-		List<Review> reviews = beer.getReviews();
-		model.addAttribute("reviews", reviews);
+		return "newReview.jsp";
+	}
+	
+
+	
+	@GetMapping("/{reviewId}")
+	public String viewBeer(Model model, @PathVariable("reviewId") Long reviewId) {
+		Review review = service.find(reviewId);
+		
+		model.addAttribute("review", review);
 		
 		return "viewBeer.jsp";
 	}
@@ -77,12 +72,12 @@ public class BeerController {
 	
 //	Post Requests
 	@PostMapping("/add")
-	public String createBeer(@Valid @ModelAttribute("beer") Beer beer, BindingResult result) {
+	public String createReview(@Valid @ModelAttribute("review") Review review, BindingResult result) {
 		if (result.hasErrors()) {
-			return "newBeer.jsp";
+			return "newReview.jsp";
 		}
 		
-		this.service.create(beer);
+		this.service.create(review);
 		
 		return "redirect:/beers/all";
 		

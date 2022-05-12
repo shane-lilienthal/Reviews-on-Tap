@@ -21,46 +21,23 @@
 				</div>
 				<p>WHERE BEER LOVERS REVIEW BEER</p>
 			</div>
-			<div class="d-flex align-items-center">
-				<a class="ms-3" href="/home">Home</a> <a class="ms-3"
-					href="/users/${currentUser.id}">My Profile</a> <a class="ms-3"
-					href="/beers/all">All Beers</a> <a class="ms-3"
+			<div class="d-flex align-items-center justify-content-between">
+				<a class="ms-3" href="/users/${currentUser.id}">My Profile</a> <a
+					class="ms-3" href="/beers/all">All Beers</a> <a class="ms-3"
 					href="/users/logout">Logout</a>
 			</div>
 		</div>
-		<div class="d-flex justify-content-between p-5">
-
-
-			<div>
-				<div class="border p-3">
-					<div class="d-flex justify-content-center mb-3">
-						<img class="" src="${beer.picture}" />
-					</div>
-					<h3 class="mb-3">Name: ${beer.name}</h3>
-					<h3 class="mb-3">Brewery: ${beer.brewery}</h3>
-					<h3 class="mb-3">Type: ${beer.type}</h3>
-					<h3 class="mb-3">ABV: ${beer.abv}%</h3>
-				</div>
-				<div>
-					<a class="d-flex justify-content-center mt-3"
-						href="/reviews/new/${beer.id}">Add your review here!</a>
-				</div>
-			</div>
+		<div class="d-flex justify-content-center">
 			<div>
 				<c:forEach var="review" items="${reviews}">
-					<div class="border p-3 mb-3 ms-3">
-						<div>
-							<h3>Reviewed By: ${review.user.firstName}
-								${review.user.lastName}, ${review.user.hometown}</h3>
-						</div>
-						<div>
-							<p>Score: ${review.score}/5</p>
-						</div>
+					<div class="border p-3 mb-3">
+						<h3>${review.beer.name}</h3>
+						<p>Reviewed By: ${review.user.firstName}
+							${review.user.lastName}, ${review.user.hometown}</p>
+						<p>Score: ${review.score}/5</p>
 					</div>
 				</c:forEach>
 			</div>
-
-
 		</div>
 	</div>
 </body>

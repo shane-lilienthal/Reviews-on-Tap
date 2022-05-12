@@ -6,3 +6,8 @@ img {
 .border {
 	border: solid 20px black;
 }
+
+#title-img {
+	height: 50px;
+	width: 50px;
+}

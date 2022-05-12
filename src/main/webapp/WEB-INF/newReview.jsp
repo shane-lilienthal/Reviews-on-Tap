@@ -28,39 +28,33 @@
 					href="/users/logout">Logout</a>
 			</div>
 		</div>
-		<div class="d-flex justify-content-between p-5">
-
-
+		<div class="d-flex justify-content-center">
 			<div>
-				<div class="border p-3">
-					<div class="d-flex justify-content-center mb-3">
-						<img class="" src="${beer.picture}" />
-					</div>
-					<h3 class="mb-3">Name: ${beer.name}</h3>
-					<h3 class="mb-3">Brewery: ${beer.brewery}</h3>
-					<h3 class="mb-3">Type: ${beer.type}</h3>
-					<h3 class="mb-3">ABV: ${beer.abv}%</h3>
+				<div class="d-flex justify-content-center">
+					<h3>Add a review for ${beer.name}!</h3>
 				</div>
-				<div>
-					<a class="d-flex justify-content-center mt-3"
-						href="/reviews/new/${beer.id}">Add your review here!</a>
-				</div>
-			</div>
-			<div>
-				<c:forEach var="review" items="${reviews}">
-					<div class="border p-3 mb-3 ms-3">
-						<div>
-							<h3>Reviewed By: ${review.user.firstName}
-								${review.user.lastName}, ${review.user.hometown}</h3>
-						</div>
-						<div>
-							<p>Score: ${review.score}/5</p>
-						</div>
+				<form:form action="/reviews/add" method="POST"
+					modelAttribute="review">
+					<div class="mb-3">
+						<form:label class="form-label" path="score">Score:</form:label>
+						<form:input class="form-control" type="number" step="0.5"
+							path="score" />
+						<form:errors style="color: red" path="score" />
 					</div>
-				</c:forEach>
+					<div class="mb-3">
+						<form:label class="form-label" path="comments">Comments:</form:label>
+						<form:textarea class="form-control" path="comments" />
+						<form:errors style="color: red" path="comments" />
+					</div>
+					<form:input type="hidden" path="user" value="${currentUser.id}" />
+					<form:errors path="user" />
+					<form:input type="hidden" path="beer" value="${beer.id}" />
+					<form:errors path="user" />
+					<div class="d-flex justify-content-center">
+						<button class="btn btn-primary ">Add Review</button>
+					</div>
+				</form:form>
 			</div>
-
-
 		</div>
 	</div>
 </body>
