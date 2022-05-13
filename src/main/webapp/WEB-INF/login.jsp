@@ -10,35 +10,45 @@
 <link rel="stylesheet" href="/css/style.css" />
 <title>Insert title here</title>
 </head>
-<body>
-	<div class="container">
-		<div class="d-flex justify-content-between p-3">
-			<div>
-				<div class="d-flex justify-content-start">
-					<h1>Reviews on Tap</h1>
-					<img class="ms-1" id="title-img" src="https://www.pinclipart.com/picdir/middle/81-814899_beer-mug-vector-by-checonx-clipart.png">
-				</div>
-				<p>WHERE BEER LOVERS REVIEW BEER</p>
+<body class="page-body">
+	<header
+		class="d-flex justify-content-between align-items-center pt-3 pb-1">
+		<div class="ms-5">
+			<div class="d-flex justify-content-start">
+				<h1 id="title-main"><a id="title-main" href="/home">Reviews on Tap</a></h1>
+				<img class="ms-2" id="title-img" src="/images/beer.png">
 			</div>
-			<div class="d-flex align-items-center">
-				<a href="/users/register">New to Reviews on Tap? Register here!</a>
-			</div>
+			<p id="title-secondary">WHERE BEER LOVERS REVIEW BEER</p>
 		</div>
+		<div class="d-flex  me-5">
+			<c:choose>
+				<c:when test="${empty sessionScope.user}">
+					<a class="ms-3 nav-item" href="/home">Home</a>
+					<a class="ms-3 nav-item" href="/beers/all">All Beers</a>
+					<a class="ms-3 nav-item" href="/users/register">Register</a>
+				</c:when>
+			</c:choose>
+		</div>
+	</header>
+	<div class="container main-content">
 		<div class="d-flex justify-content-center">
-			<div>
+			<div class="mt-5 mb-5">
 				<div class="d-flex justify-content-center">
 					<h3>Log In</h3>
 				</div>
 				<form:form action="/users/login" method="POST" modelAttribute="user">
+					<div class="mb-3 error">
+						<c:out value="${message}" />
+					</div>
 					<div class="mb-3">
 						<form:label class="form-label" path="email">Email:</form:label>
 						<form:input class="form-control" type="email" path="email" />
-						<form:errors style="color: red" path="email" />
+
 					</div>
 					<div class="mb-3">
 						<form:label class="form-label" path="password">Password:</form:label>
 						<form:input class="form-control" type="password" path="password" />
-						<form:errors style="color: red" path="password" />
+
 					</div>
 					<div class="d-flex justify-content-center">
 						<button class="btn btn-primary ">Login</button>

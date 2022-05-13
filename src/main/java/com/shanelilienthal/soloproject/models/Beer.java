@@ -39,7 +39,7 @@ public class Beer {
 	@DecimalMin( "0.0")
 	private double abv;
 
-	@Size(min = 3, message = "A picture of the beer is required.")
+	@Size(min = 3, max = 200, message = "A picture of the beer is required.")
 	private String picture;
 
 	@Column(updatable = false)

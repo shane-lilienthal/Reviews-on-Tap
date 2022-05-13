@@ -34,6 +34,7 @@ public class UserService {
 //	Authenticate user on login
 	public User authenticate(User user) {
 		Optional<User> foundUser = this.repository.findByEmail(user.getEmail());
+		
 		if ( foundUser.isEmpty() || ! BCrypt.checkpw(user.getPassword(), foundUser.get().getPassword()) ) {
 			return null;
 		}

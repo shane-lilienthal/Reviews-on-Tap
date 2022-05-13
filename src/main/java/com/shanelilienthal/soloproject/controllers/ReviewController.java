@@ -49,8 +49,10 @@ public class ReviewController {
 	@GetMapping("/new/{beerId}")
 	public String newReviewForm(Model model, @ModelAttribute("review") Review review, @PathVariable("beerId") Long beerId, HttpSession session) {
 		
-		User currentUser = userService.find((Long)session.getAttribute("user"));
-		model.addAttribute("currentUser", currentUser);
+		if (session.getAttribute("user") != null) {
+			User currentUser = userService.find((Long)session.getAttribute("user"));
+			model.addAttribute("currentUser", currentUser);
+		}
 		
 		Beer beer = beerService.find(beerId);
 		model.addAttribute("beer", beer);

@@ -44,16 +44,19 @@ public class BeerController {
 	
 	@GetMapping("/new")
 	public String newBeerForm(Model model, @ModelAttribute("beer") Beer beer, HttpSession session) {
-		User currentUser = userService.find((Long) session.getAttribute("user"));
-		
-		model.addAttribute("currentUser", currentUser);
+		if (session.getAttribute("user") != null) {
+			User currentUser = userService.find((Long)session.getAttribute("user"));
+			model.addAttribute("currentUser", currentUser);
+		}
 		return "newBeer.jsp";
 	}
 	
 	@GetMapping("/all")
 	public String allBeers(Model model, @ModelAttribute("beer") Beer beer, HttpSession session) {
-		User currentUser = userService.find((Long) session.getAttribute("user"));
-		model.addAttribute("currentUser", currentUser);
+		if (session.getAttribute("user") != null) {
+			User currentUser = userService.find((Long)session.getAttribute("user"));
+			model.addAttribute("currentUser", currentUser);
+		}
 		
 		List<Beer> beers = service.all();
 		model.addAttribute("beers", beers);
@@ -62,8 +65,10 @@ public class BeerController {
 	
 	@GetMapping("/{beerId}")
 	public String viewBeer(Model model, @PathVariable("beerId") Long beerId, HttpSession session) {
-		User currentUser = userService.find((Long) session.getAttribute("user"));
-		model.addAttribute("currentUser", currentUser);
+		if (session.getAttribute("user") != null) {
+			User currentUser = userService.find((Long)session.getAttribute("user"));
+			model.addAttribute("currentUser", currentUser);
+		}
 		
 		Beer beer = service.find(beerId);
 		model.addAttribute("beer", beer);

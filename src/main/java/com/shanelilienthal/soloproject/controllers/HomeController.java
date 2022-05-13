@@ -30,11 +30,17 @@ public class HomeController {
 	ReviewService reviewService;
 	
 //	Get Requests
+	@GetMapping("/")
+	public String rootRoute() {
+		return "redirect:/home";	
+	}
 	
 	@GetMapping("/home")
 	public String home(Model model, @ModelAttribute("review") Review review, HttpSession session) {
-		User currentUser = userService.find((Long)session.getAttribute("user"));
-		model.addAttribute("currentUser", currentUser);
+		if (session.getAttribute("user") != null) {
+			User currentUser = userService.find((Long)session.getAttribute("user"));
+			model.addAttribute("currentUser", currentUser);
+		}
 		
 		List<Review> reviews = reviewService.all();
 		model.addAttribute("reviews", reviews);
