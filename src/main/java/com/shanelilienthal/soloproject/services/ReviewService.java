@@ -22,12 +22,21 @@ public class ReviewService {
 		return this.repository.findAll();
 	}
 	
-//	Create new beer
+//	Create new review
 	public Review create(Review review) {
 		return this.repository.save(review);
 	}
 	
-//	Find one beer
+	public Review save(Review review) {
+		return this.repository.save(review);
+	}
+	
+	public void delete(Long id) {
+		 this.repository.deleteById(id);
+	 }
+
+	
+//	Find one review
 	public Review find(Long id) {
 		return this.repository.findById(id).get();
 	}

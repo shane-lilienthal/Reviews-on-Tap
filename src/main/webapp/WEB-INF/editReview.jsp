@@ -33,10 +33,11 @@
 		<div class="d-flex justify-content-center">
 			<div class="mt-5 mb-5">
 				<div class="d-flex justify-content-center static-title">
-					<h3>Add a review for ${beer.name}!</h3>
+					<h3>Edit Review</h3>
 				</div>
-				<form:form action="/reviews/${beer.id}/add" method="POST"
+				<form:form action="/reviews/${review.id}/update" method="POST"
 					modelAttribute="review">
+					<input type="hidden" name="id" value="<c:out value="${review.id}"/>">
 					<div class="mb-3">
 						<form:label class="form-label static-title" path="score">Score:</form:label>
 						<form:input class="form-control" type="number" step="0.5"
@@ -53,7 +54,7 @@
 					<form:input type="hidden" path="beer" value="${beer.id}" />
 					<form:errors path="user" />
 					<div class="d-flex justify-content-center">
-						<button class="btn btn-warning">Add Review</button>
+						<button class="btn btn-warning">Update</button>
 					</div>
 				</form:form>
 			</div>

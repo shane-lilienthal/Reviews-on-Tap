@@ -50,6 +50,12 @@ public class UserService {
 		if (session.getAttribute("user") == null) return null;
 		return this.find((Long) session.getAttribute("user")); 
 	}
+	
+	 public User save(User user) {
+		 String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+			user.setPassword(hashedPassword);
+		 return this.repository.save(user);
+	 }
 }
 	
 

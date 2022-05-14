@@ -1,7 +1,6 @@
 package com.shanelilienthal.soloproject.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -15,74 +14,121 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.shanelilienthal.soloproject.models.Beer;
 import com.shanelilienthal.soloproject.models.Review;
 import com.shanelilienthal.soloproject.models.User;
-import com.shanelilienthal.soloproject.repositories.BeerRepository;
+
 import com.shanelilienthal.soloproject.repositories.ReviewRepository;
 import com.shanelilienthal.soloproject.services.BeerService;
 import com.shanelilienthal.soloproject.services.ReviewService;
 import com.shanelilienthal.soloproject.services.UserService;
 
-
 @Controller
 @RequestMapping("reviews")
 public class ReviewController {
-	
+
 	@Autowired
 	ReviewService service;
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	BeerService beerService;
-	
+
 	@Autowired
 	ReviewRepository repository;
-	
-	
+
 //	Get Requests
-	
+
 	@GetMapping("/new/{beerId}")
-	public String newReviewForm(Model model, @ModelAttribute("review") Review review, @PathVariable("beerId") Long beerId, HttpSession session) {
-		
+	public String newReviewForm(Model model, @ModelAttribute("review") Review review,
+			@PathVariable("beerId") Long beerId, HttpSession session) {
+
 		if (session.getAttribute("user") != null) {
-			User currentUser = userService.find((Long)session.getAttribute("user"));
+			User currentUser = userService.find((Long) session.getAttribute("user"));
 			model.addAttribute("currentUser", currentUser);
 		}
-		
+		if (session.getAttribute("user") == null)
+			return "redirect:/home";
+
 		Beer beer = beerService.find(beerId);
 		model.addAttribute("beer", beer);
-		
+
 		return "newReview.jsp";
 	}
-	
 
-	
-	@GetMapping("/{reviewId}")
-	public String viewBeer(Model model, @PathVariable("reviewId") Long reviewId) {
+	@GetMapping("/{reviewId}/edit")
+	public String editReview(Model model, @PathVariable("reviewId") Long reviewId, HttpSession session) {
+
 		Review review = service.find(reviewId);
-		
 		model.addAttribute("review", review);
-		
-		return "viewBeer.jsp";
+
+		Beer beer = review.getBeer();
+		model.addAttribute("beer", beer);
+
+		if (session.getAttribute("user") != null) {
+			User currentUser = userService.find((Long) session.getAttribute("user"));
+			model.addAttribute("currentUser", currentUser);
+		}
+
+		if (session.getAttribute("user") != review.getUser())
+			return "redirect:/home";
+
+		return "editReview.jsp";
 	}
-	
-	
+
+	@GetMapping("/{reviewId}/delete")
+	public String delete(Model model, @PathVariable("reviewId") Long reviewId, HttpSession session) {
+		Review review = service.find(reviewId);
+		model.addAttribute("review", review);
+
+		if (session.getAttribute("user") != null && session.getAttribute("user") == review.getUser().getId()) {
+
+			User currentUser = userService.find((Long) session.getAttribute("user"));
+			model.addAttribute("currentUser", currentUser);
+			Long userId = currentUser.getId();
+
+			this.service.delete(reviewId);
+			return String.format("redirect:/users/%d", userId);
+
+		}
+
+		return "redirect:/home";
+
+	}
+
 //	Post Requests
-	@PostMapping("/add")
-	public String createReview(@Valid @ModelAttribute("review") Review review, BindingResult result) {
+	@PostMapping("/{beerId}/add")
+	public String createReview(@Valid @ModelAttribute("review") Review review, @PathVariable("beerId") Long beerId, BindingResult result, HttpSession session) {
 		if (result.hasErrors()) {
 			return "newReview.jsp";
 		}
-		
+
 		this.service.create(review);
-		
-		return "redirect:/beers/all";
-		
+
+		return String.format("redirect:/beers/%d", beerId);
+
+	}
+
+	@PostMapping("/{reviewId}/update")
+	public String update(Model model, @Valid @ModelAttribute("review") Review review, BindingResult result,
+			@PathVariable("reviewId") Long reviewId, HttpSession session) {
+
+		if (result.hasErrors()) {
+			return "editReview.jsp";
+		}
+
+		this.service.save(review);
+
+		User currentUser = userService.find((Long) session.getAttribute("user"));
+		model.addAttribute("currentUser", currentUser);
+
+		Long userId = currentUser.getId();
+
+		return String.format("redirect:/users/%d", userId);
 	}
 
 }

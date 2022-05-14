@@ -1,7 +1,7 @@
 package com.shanelilienthal.soloproject.repositories;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -12,5 +12,5 @@ public interface BeerRepository extends CrudRepository<Beer, Long> {
 	
 	List<Beer>findAll();
 	
-
+	Optional<Beer>findByName(String name);
 }

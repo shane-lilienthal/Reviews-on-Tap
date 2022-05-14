@@ -1,6 +1,6 @@
 package com.shanelilienthal.soloproject.controllers;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.shanelilienthal.soloproject.models.Beer;
 import com.shanelilienthal.soloproject.models.Review;
@@ -48,6 +48,7 @@ public class BeerController {
 			User currentUser = userService.find((Long)session.getAttribute("user"));
 			model.addAttribute("currentUser", currentUser);
 		}
+		if (session.getAttribute("user") == null) return "redirect:/home";
 		return "newBeer.jsp";
 	}
 	
@@ -82,7 +83,10 @@ public class BeerController {
 	
 //	Post Requests
 	@PostMapping("/add")
-	public String createBeer(@Valid @ModelAttribute("beer") Beer beer, BindingResult result) {
+	public String createBeer(@Valid @ModelAttribute("beer") Beer beer, BindingResult result, HttpSession session) {
+		if ( this.repository.findByName(beer.getName()).isPresent() ) {
+			result.rejectValue("name", "Name", "That beer is already in our collection.");
+		}
 		if (result.hasErrors()) {
 			return "newBeer.jsp";
 		}

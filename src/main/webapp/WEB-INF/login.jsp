@@ -11,16 +11,16 @@
 <title>Insert title here</title>
 </head>
 <body class="page-body">
-	<header
-		class="d-flex justify-content-between align-items-center pt-3 pb-1">
-		<div class="ms-5">
+	<header class="pt-1 pb-1">
+	<div class="container d-flex justify-content-between align-items-center">
+		<div>
 			<div class="d-flex justify-content-start">
 				<h1 id="title-main"><a id="title-main" href="/home">Reviews on Tap</a></h1>
 				<img class="ms-2" id="title-img" src="/images/beer.png">
 			</div>
 			<p id="title-secondary">WHERE BEER LOVERS REVIEW BEER</p>
 		</div>
-		<div class="d-flex  me-5">
+		<div class="d-flex">
 			<c:choose>
 				<c:when test="${empty sessionScope.user}">
 					<a class="ms-3 nav-item" href="/home">Home</a>
@@ -29,11 +29,12 @@
 				</c:when>
 			</c:choose>
 		</div>
+	</div>
 	</header>
 	<div class="container main-content">
 		<div class="d-flex justify-content-center">
 			<div class="mt-5 mb-5">
-				<div class="d-flex justify-content-center">
+				<div class="d-flex justify-content-center static-title">
 					<h3>Log In</h3>
 				</div>
 				<form:form action="/users/login" method="POST" modelAttribute="user">
@@ -41,17 +42,17 @@
 						<c:out value="${message}" />
 					</div>
 					<div class="mb-3">
-						<form:label class="form-label" path="email">Email:</form:label>
+						<form:label class="form-label static-title" path="email">Email:</form:label>
 						<form:input class="form-control" type="email" path="email" />
 
 					</div>
 					<div class="mb-3">
-						<form:label class="form-label" path="password">Password:</form:label>
+						<form:label class="form-label static-title" path="password">Password:</form:label>
 						<form:input class="form-control" type="password" path="password" />
 
 					</div>
 					<div class="d-flex justify-content-center">
-						<button class="btn btn-primary ">Login</button>
+						<button class="btn btn-warning">Log In</button>
 					</div>
 				</form:form>
 			</div>
