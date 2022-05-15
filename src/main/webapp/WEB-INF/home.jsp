@@ -54,7 +54,10 @@
 						</h2>
 						<h4>Reviewed By: ${review.user.firstName}
 							${review.user.lastName}, ${review.user.hometown}</h4>
-						<h4>Score: ${review.score}/5</h4>
+						<div class="d-flex justify-content-start">
+							<h4>Score: ${review.score}/5</h4>
+							<img class="ms-2" id="review-img" src="/images/star.png">
+						</div>
 						<h4>Comments:</h4>
 						<p>${review.comments}</p>
 					</div>

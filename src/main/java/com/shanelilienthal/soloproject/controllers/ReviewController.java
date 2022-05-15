@@ -43,6 +43,7 @@ public class ReviewController {
 
 //	Get Requests
 
+//	Render form to add a review. Attach current user and the beer that the review will be for. If no user in session, review can't be added.
 	@GetMapping("/new/{beerId}")
 	public String newReviewForm(Model model, @ModelAttribute("review") Review review,
 			@PathVariable("beerId") Long beerId, HttpSession session) {
@@ -60,6 +61,7 @@ public class ReviewController {
 		return "newReview.jsp";
 	}
 
+//	Render form to edit a review. If there is no user in session or not the user that left review, redirect to home page.
 	@GetMapping("/{reviewId}/edit")
 	public String editReview(Model model, @PathVariable("reviewId") Long reviewId, HttpSession session) {
 
@@ -69,17 +71,19 @@ public class ReviewController {
 		Beer beer = review.getBeer();
 		model.addAttribute("beer", beer);
 
+		
 		if (session.getAttribute("user") != null) {
 			User currentUser = userService.find((Long) session.getAttribute("user"));
 			model.addAttribute("currentUser", currentUser);
+			if (currentUser != review.getUser())
+				return "redirect:/home";
 		}
 
-		if (session.getAttribute("user") != review.getUser())
-			return "redirect:/home";
 
 		return "editReview.jsp";
 	}
 
+//	Delete a review. If user not in session or not user that left review, redirect to home page.
 	@GetMapping("/{reviewId}/delete")
 	public String delete(Model model, @PathVariable("reviewId") Long reviewId, HttpSession session) {
 		Review review = service.find(reviewId);
@@ -101,6 +105,8 @@ public class ReviewController {
 	}
 
 //	Post Requests
+	
+//	Add a review to the database
 	@PostMapping("/{beerId}/add")
 	public String createReview(@Valid @ModelAttribute("review") Review review, @PathVariable("beerId") Long beerId, BindingResult result, HttpSession session) {
 		if (result.hasErrors()) {
@@ -113,6 +119,7 @@ public class ReviewController {
 
 	}
 
+//	Save updated review info.
 	@PostMapping("/{reviewId}/update")
 	public String update(Model model, @Valid @ModelAttribute("review") Review review, BindingResult result,
 			@PathVariable("reviewId") Long reviewId, HttpSession session) {

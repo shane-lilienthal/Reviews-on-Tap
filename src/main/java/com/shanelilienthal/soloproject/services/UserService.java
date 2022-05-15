@@ -19,11 +19,23 @@ public class UserService {
 	@Autowired
 	private UserRepository repository;
 	
+//	Get all users
 	public List<User> all() {
 		return this.repository.findAll();
 	}
 	
-//	Create new user
+//	Find one user
+	public User find(Long id) {
+		return this.repository.findById(id).get();
+	}
+	
+//	Find the current user in session
+	public User findCurrentUser(HttpSession session) {
+		if (session.getAttribute("user") == null) return null;
+		return this.find((Long) session.getAttribute("user")); 
+	}
+	
+//	Create new user. Hash the password with BCrypt to store in db.
 	public User create(User user) {
 		String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 		user.setPassword(hashedPassword);
@@ -31,7 +43,7 @@ public class UserService {
 		return this.repository.save(user);
 	}
 	
-//	Authenticate user on login
+//	Authenticate user on login. Find user by email address. Check if there is a user in db and if their password matches. 
 	public User authenticate(User user) {
 		Optional<User> foundUser = this.repository.findByEmail(user.getEmail());
 		
@@ -41,16 +53,7 @@ public class UserService {
 		return foundUser.get();
 	}
 	
-//	Find one user
-	public User find(Long id) {
-		return this.repository.findById(id).get();
-	}
-	
-	public User findCurrentUser(HttpSession session) {
-		if (session.getAttribute("user") == null) return null;
-		return this.find((Long) session.getAttribute("user")); 
-	}
-	
+//	Save user info on update. Save password as hashed password using BCrypt.  
 	 public User save(User user) {
 		 String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 			user.setPassword(hashedPassword);

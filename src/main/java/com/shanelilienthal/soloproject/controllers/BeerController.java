@@ -42,6 +42,7 @@ public class BeerController {
 	
 //	Get Requests
 	
+//	Render form to add a new beer. If there is no user in session a beer can't be added.
 	@GetMapping("/new")
 	public String newBeerForm(Model model, @ModelAttribute("beer") Beer beer, HttpSession session) {
 		if (session.getAttribute("user") != null) {
@@ -52,6 +53,7 @@ public class BeerController {
 		return "newBeer.jsp";
 	}
 	
+//	Display all of the beers from the database
 	@GetMapping("/all")
 	public String allBeers(Model model, @ModelAttribute("beer") Beer beer, HttpSession session) {
 		if (session.getAttribute("user") != null) {
@@ -64,6 +66,7 @@ public class BeerController {
 		return "allBeers.jsp";
 	}
 	
+//	Display one beer from db with all of its info and reviews
 	@GetMapping("/{beerId}")
 	public String viewBeer(Model model, @PathVariable("beerId") Long beerId, HttpSession session) {
 		if (session.getAttribute("user") != null) {
@@ -82,6 +85,8 @@ public class BeerController {
 	
 	
 //	Post Requests
+	
+//	Add beer to database upon form submission. If the beer name is already in the db show an error. 
 	@PostMapping("/add")
 	public String createBeer(@Valid @ModelAttribute("beer") Beer beer, BindingResult result, HttpSession session) {
 		if ( this.repository.findByName(beer.getName()).isPresent() ) {

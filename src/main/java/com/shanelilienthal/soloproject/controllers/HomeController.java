@@ -30,11 +30,14 @@ public class HomeController {
 	ReviewService reviewService;
 	
 //	Get Requests
+	
+//	Root route. Redirect to the home page
 	@GetMapping("/")
 	public String rootRoute() {
 		return "redirect:/home";	
 	}
 	
+//	Home Page. List all of the reviews from db and see if there is a user in session.
 	@GetMapping("/home")
 	public String home(Model model, @ModelAttribute("review") Review review, HttpSession session) {
 		if (session.getAttribute("user") != null) {

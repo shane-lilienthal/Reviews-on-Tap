@@ -60,12 +60,17 @@
 									<a class="beer-title-review" href="/beers/${review.beer.id}">${review.beer.name}</a>
 								</h3>
 							</div>
-							<p>Score: ${review.score}/5</p>
-							<p>Comments:</p>
+							<div class="d-flex justify-content-start">
+								<h4>Score: ${review.score}/5</h4>
+								<img class="ms-2" id="review-img" src="/images/star.png">
+							</div>
+							<h4>Comments:</h4>
 							<p>${review.comments}</p>
 							<div>
-							<a href="/reviews/${review.id}/edit"><button class="btn btn-primary">Edit</button></a>
-							<a href="/reviews/${review.id}/delete"><button class="btn btn-danger">Delete</button></a>
+								<a href="/reviews/${review.id}/edit"><button
+										class="btn btn-primary">Edit</button></a> <a
+									href="/reviews/${review.id}/delete"><button
+										class="btn btn-danger">Delete</button></a>
 							</div>
 						</div>
 					</c:forEach>

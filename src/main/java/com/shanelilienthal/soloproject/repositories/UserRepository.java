@@ -9,8 +9,10 @@ import com.shanelilienthal.soloproject.models.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 	
+//	find all users
 	List<User>findAll();
 	
+//	find user by email
 	Optional<User> findByEmail(String email);
 
 }

@@ -42,6 +42,7 @@ public class Beer {
 	@Size(min = 3, max = 200, message = "A picture of the beer is required.")
 	private String picture;
 
+	
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
@@ -58,9 +59,11 @@ public class Beer {
     	this.updatedAt = new Date();
     }
     
+    
 //    Database Relationships
     @OneToMany(mappedBy="beer", fetch = FetchType.LAZY)
     private List<Review> reviews;
+    
     
 //	Constructor, Getters, Setters
 	public Beer() {}

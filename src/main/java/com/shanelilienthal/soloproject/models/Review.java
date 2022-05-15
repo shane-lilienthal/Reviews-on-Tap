@@ -36,6 +36,7 @@ public class Review {
 
 	@Size(min = 1, message = "Some comments are required to review a beer.")
 	private String comments;
+	
 
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -53,6 +54,7 @@ public class Review {
     	this.updatedAt = new Date();
     }
     
+    
 //    Database Relationships
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
@@ -62,6 +64,7 @@ public class Review {
     @JoinColumn(name="beer_id")
     private Beer beer;
 	
+    
 //    Constructors, Getters, Setters
 	public Review() {}
 

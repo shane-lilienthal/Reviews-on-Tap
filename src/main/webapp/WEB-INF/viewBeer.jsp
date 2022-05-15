@@ -58,8 +58,8 @@
 				<div>
 					<c:choose>
 						<c:when test="${empty sessionScope.user}">
-							<p class="d-flex justify-content-center mt-3 static-title">Log in
-								or register to leave a review!</p>
+							<p class="d-flex justify-content-center mt-3 static-title">Log
+								in or register to leave a review!</p>
 						</c:when>
 						<c:otherwise>
 							<a class="d-flex justify-content-center mt-3 nav-item"
@@ -80,7 +80,10 @@
 								<h3>Reviewed By: ${review.user.firstName}
 									${review.user.lastName}, ${review.user.hometown}</h3>
 							</div>
-							<h4>Score: ${review.score}/5</h4>
+							<div class="d-flex justify-content-start">
+								<h4>Score: ${review.score}/5</h4>
+								<img class="ms-2" id="review-img" src="/images/star.png">
+							</div>
 							<h4>Comments:</h4>
 							<p>${review.comments}</p>
 						</div>

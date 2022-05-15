@@ -12,6 +12,7 @@ import com.shanelilienthal.soloproject.models.Review;
 
 public interface ReviewRepository extends CrudRepository<Review, Long> {
 	
+//	find all reviews
 	List<Review>findAll();
 	
 }

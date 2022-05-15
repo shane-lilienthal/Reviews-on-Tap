@@ -45,6 +45,7 @@ public class User {
 	@Transient
 	private String passwordConfirm;
 	
+	
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
@@ -61,11 +62,13 @@ public class User {
 		this.updatedAt = new Date();
 	}
 	
+	
 //	Database Relationships
     @OneToMany(mappedBy="user", fetch = FetchType.LAZY)
     private List<Review> reviews;
 
-	
+
+//    Constructor and Getters/Setters
 	public User() {}
 
 	public Long getId() {
@@ -139,9 +142,11 @@ public class User {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
 	public List<Review> getReviews() {
 		return reviews;
 	}
+	
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}

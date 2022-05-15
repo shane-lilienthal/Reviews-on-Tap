@@ -10,7 +10,9 @@ import com.shanelilienthal.soloproject.models.Beer;
 
 public interface BeerRepository extends CrudRepository<Beer, Long> {
 	
+//	Find all beers
 	List<Beer>findAll();
 	
+//	Find a beer by name
 	Optional<Beer>findByName(String name);
 }
