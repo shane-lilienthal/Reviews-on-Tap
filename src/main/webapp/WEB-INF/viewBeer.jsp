@@ -66,7 +66,6 @@
 								href="/reviews/new/${beer.id}">Add your review here!</a>
 						</c:otherwise>
 					</c:choose>
-
 				</div>
 			</div>
 			<div>

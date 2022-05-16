@@ -108,7 +108,7 @@ public class ReviewController {
 	
 //	Add a review to the database
 	@PostMapping("/{beerId}/add")
-	public String createReview(@Valid @ModelAttribute("review") Review review, @PathVariable("beerId") Long beerId, BindingResult result, HttpSession session) {
+	public String createReview(@Valid @ModelAttribute("review") Review review, BindingResult result, @PathVariable("beerId") Long beerId, HttpSession session) {
 		if (result.hasErrors()) {
 			return "newReview.jsp";
 		}
