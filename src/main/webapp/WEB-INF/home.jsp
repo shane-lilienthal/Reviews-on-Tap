@@ -8,10 +8,10 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/css/style.css" />
-<title>Insert title here</title>
+<title>Reviews on Tap</title>
 </head>
 <body class="page-body">
-	<header class="pt-1 pb-1">
+	<header class="pt-2 pb-1">
 		<div
 			class="container d-flex justify-content-between align-items-center">
 			<div>
@@ -40,13 +40,13 @@
 		</div>
 	</header>
 	<div class="container main-content">
-		<div class="d-flex justify-content-center mb-3 static-title">
+		<div class="d-flex justify-content-center p-3 static-title">
 			<h3>
 				<c:out value="${message}" />
 			</h3>
 		</div>
 		<div class="d-flex justify-content-center">
-			<div class="mt-5 mb-5">
+			<div class="mt-5 mb-5  ps-3 pe-3">
 				<c:forEach var="review" items="${reviews}">
 					<div class="border review-item p-3 mb-3">
 						<h2>
@@ -56,7 +56,7 @@
 							${review.user.lastName}, ${review.user.hometown}</h4>
 						<div class="d-flex justify-content-start">
 							<h4>Score: ${review.score}/5</h4>
-							<img class="ms-2" id="review-img" src="/images/star.png">
+							<img class="ms-1" id="review-img" src="/images/star_icon.png">
 						</div>
 						<h4>Comments:</h4>
 						<p>${review.comments}</p>

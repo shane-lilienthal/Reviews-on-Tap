@@ -110,7 +110,7 @@ public class UserController {
 	
 //	Create a new user. Check for any validation errors. When successful redirect to home page with user in session.
 	@PostMapping("/register")
-	public String register(@Valid @ModelAttribute("user") User user, RedirectAttributes redirectAttributes, BindingResult result, HttpSession session) {
+	public String register(@Valid @ModelAttribute("user") User user, BindingResult result, RedirectAttributes redirectAttributes, HttpSession session) {
 		
 		if (!user.getPassword().equals(user.getPasswordConfirm())) {
 			result.rejectValue("password", "Matches", "The passwords do not match!");	
@@ -124,11 +124,11 @@ public class UserController {
 			return "registration.jsp";
 		}
 		
+		redirectAttributes.addFlashAttribute("message", String.format("Hello %s! Welcome to Reviews on Tap!", user.getFirstName()));
 		
 		this.service.create(user);
 		
 		session.setAttribute("user", user.getId());
-		redirectAttributes.addFlashAttribute("message", String.format("Hello %s! Welcome to Reviews on Tap!", user.getFirstName()));
 		
 		return "redirect:/home";
 	}

@@ -8,10 +8,10 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/css/style.css" />
-<title>Insert title here</title>
+<title>Reviews on Tap</title>
 </head>
 <body class="page-body">
-	<header class="pt-1 pb-1">
+	<header class="pt-2 pb-1">
 		<div
 			class="container d-flex justify-content-between align-items-center">
 			<div>
@@ -21,7 +21,7 @@
 					</h1>
 					<img class="ms-2" id="title-img" src="/images/beer.png">
 				</div>
-				<p id="title-secondary">WHERE BEER LOVERS REVIEW BEER</p>
+				<p id="title-secondary">REVIEWS BY BEER LOVERS, FOR BEER LOVERS</p>
 			</div>
 			<div class="d-flex">
 				<a class="ms-3 nav-item" href="/home">Home</a> <a
@@ -45,31 +45,31 @@
 				<div class="d-flex justify-content-center static-title">
 					<h3>Edit Info</h3>
 				</div>
-				<form:form action="/users/${currentUser.id}/update" method="POST"
+				<form:form class="p-3" action="/users/${currentUser.id}/update" method="POST"
 					modelAttribute="currentUser">
 					<input type="hidden" name="id" value="<c:out value="${currentUser.id}"/>">
 					<div class="mb-3">
-						<form:label class="form-label static-title" path="firstName">First Name:</form:label>
+						<form:label class="form-label" path="firstName">First Name:</form:label>
 						<form:input class="form-control" type="text" path="firstName" />
 						<form:errors class="error" path="firstName" />
 					</div>
 					<div class="mb-3">
-						<form:label class="form-label static-title" path="firstName">Last Name:</form:label>
+						<form:label class="form-label" path="firstName">Last Name:</form:label>
 						<form:input class="form-control" type="text" path="lastName" />
 						<form:errors class="error" path="lastName" />
 					</div>
 					<div class="mb-3">
-						<form:label class="form-label static-title" path="hometown">Hometown:(optional)</form:label>
+						<form:label class="form-label" path="hometown">Hometown:(optional)</form:label>
 						<form:input class="form-control" type="text" path="hometown" />
 						<form:errors class="error" path="hometown" />
 					</div>
 					<div class="mb-3">
-						<form:label class="form-label static-title" path="email">Email:</form:label>
+						<form:label class="form-label" path="email">Email:</form:label>
 						<form:input class="form-control" type="email" path="email" />
 						<form:errors class="error" path="email" />
 					</div>
 					<div class="mb-3">
-						<form:label class="form-label static-title" path="password">Enter Current Password or New Password:</form:label>
+						<form:label class="form-label" path="password">Enter Current Password or New Password:</form:label>
 						<form:input class="form-control" type="password" value="" path="password" />
 						<form:errors class="error" path="password" />
 					</div>

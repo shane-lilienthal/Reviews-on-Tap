@@ -8,10 +8,10 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/css/style.css" />
-<title>Insert title here</title>
+<title>Reviews on Tap</title>
 </head>
 <body class = "page-body">
-	<header class="pt-1 pb-1">
+	<header class="pt-2 pb-1">
 	<div class=" container d-flex justify-content-between align-items-center">
 		<div>
 			<div class="d-flex justify-content-start">
@@ -19,7 +19,7 @@
 				<img class="ms-2" id="title-img"
 					src="/images/beer.png">
 			</div>
-			<p id="title-secondary">REVIEWS FOR BEER LOVERS, BY BEER LOVERS</p>
+			<p id="title-secondary">REVIEWS BY BEER LOVERS, FOR BEER LOVERS</p>
 		</div>
 		<div class="d-flex">
 			<a class="ms-3 nav-item" href="/home">Home</a>
@@ -35,17 +35,17 @@
 				<div class="d-flex justify-content-center static-title">
 					<h3>Edit Review</h3>
 				</div>
-				<form:form action="/reviews/${review.id}/update" method="POST"
+				<form:form class="p-3" action="/reviews/${review.id}/update" method="POST"
 					modelAttribute="review">
 					<input type="hidden" name="id" value="<c:out value="${review.id}"/>">
 					<div class="mb-3">
-						<form:label class="form-label static-title" path="score">Score:</form:label>
+						<form:label class="form-label" path="score">Score:</form:label>
 						<form:input class="form-control" type="number" step="0.5"
 							path="score" />
 						<form:errors class="error" path="score" />
 					</div>
 					<div class="mb-3">
-						<form:label class="form-label static-title" path="comments">Comments:</form:label>
+						<form:label class="form-label" path="comments">Comments:</form:label>
 						<form:textarea class="form-control" path="comments" />
 						<form:errors class="error" path="comments" />
 					</div>

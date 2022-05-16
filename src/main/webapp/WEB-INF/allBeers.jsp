@@ -8,10 +8,10 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/css/style.css" />
-<title>Insert title here</title>
+<title>Reviews on Tap</title>
 </head>
 <body class="page-body">
-	<header class="pt-1 pb-1">
+	<header class="pt-2 pb-1">
 		<div
 			class="container d-flex justify-content-between align-items-center">
 			<div>
@@ -44,25 +44,27 @@
 			<div>
 				<c:choose>
 					<c:when test="${empty sessionScope.user}">
-						<div class="d-flex justify-content-center static-title">
+						<div class="d-flex justify-content-center static-title mb-5">
 							<p>*Log in or register to add a beer to the collection!</p>
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div class="d-flex justify-content-center">
+						<div class="d-flex justify-content-center mb-5">
 							<a class="nav-item" href="/beers/new">*Don't see a beer?
 								Add it here!</a>
 						</div>
 					</c:otherwise>
 				</c:choose>
-				<c:forEach var="beer" items="${beers}">
-					<div class="d-flex justify-content-start align-items-center mb-4">
-						<img src="${beer.picture}" />
-						<h1>
-							<a class="beer-title ms-5" href="/beers/${beer.id}">${beer.name}</a>
-						</h1>
-					</div>
-				</c:forEach>
+				<div class="all-beers ps-3 pe-3 mb-5">
+					<c:forEach var="beer" items="${beers}">
+						<div class="d-flex justify-content-start align-items-center mb-4">
+							<img src="${beer.picture}" />
+							<h1>
+								<a class="beer-title ms-5" href="/beers/${beer.id}">${beer.name}</a>
+							</h1>
+						</div>
+					</c:forEach>
+				</div>
 			</div>
 		</div>
 	</div>

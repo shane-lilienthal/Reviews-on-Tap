@@ -11,6 +11,8 @@
 
 form {
 	width: 500px;
+	background: rgba(255, 255, 255, .7);
+	border-radius: 10px;
 }
 
 .error {
@@ -47,11 +49,15 @@ header {
 }
 
 .page-body {
-	background-color: dimgrey;
+	background-image: url(/images/beer_flight.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100%;
+	background-color: dimgray;
 }
 
 .main-content {
-	margin-top: 150px;
+	margin-top: 100px;
 	width: 90%;
 }
 
@@ -84,10 +90,11 @@ header {
 
 
 .review-item {
-	background-color: white;
+	background: rgba(255, 255, 255, .7);
 	width: 100%;
 	width: 700px;
 	border-radius: 10px;
+	
 }
 
 .review-item h4 {
@@ -101,7 +108,7 @@ header {
 
 
 .beer-item {
-	background-color: white;
+	background-color: rgba(255, 255, 255, .7);
 	border-radius: 10%;
 	width:400px;
 }
@@ -121,13 +128,15 @@ header {
 }
 .beer-title-review:hover {
 	color: gold;
-	font-size: 120%;
+}
+.all-beers {
+	width: 700px;
 }
 
 
 
 .user-item {
-	background-color: white;
+	background-color: rgba(255, 255, 255, .7);
 	border-radius: 10%;
 	width: 400px;
 }
@@ -137,5 +146,6 @@ header {
 .scroll {
 	overflow: scroll;
 	overflow-x: hidden;
-	height: 400px;
+	height: 500px;
+	scrollbar-color: dark;
 }

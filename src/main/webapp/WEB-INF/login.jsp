@@ -8,17 +8,17 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/css/style.css" />
-<title>Insert title here</title>
+<title>Reviews on Tap</title>
 </head>
 <body class="page-body">
-	<header class="pt-1 pb-1">
+	<header class="pt-2 pb-1">
 	<div class="container d-flex justify-content-between align-items-center">
 		<div>
 			<div class="d-flex justify-content-start">
 				<h1 id="title-main"><a id="title-main" href="/home">Reviews on Tap</a></h1>
 				<img class="ms-2" id="title-img" src="/images/beer.png">
 			</div>
-			<p id="title-secondary">WHERE BEER LOVERS REVIEW BEER</p>
+			<p id="title-secondary">REVIEWS BY BEER LOVERS, FOR BEER LOVERS</p>
 		</div>
 		<div class="d-flex">
 			<c:choose>
@@ -37,17 +37,17 @@
 				<div class="d-flex justify-content-center static-title">
 					<h3>Log In</h3>
 				</div>
-				<form:form action="/users/login" method="POST" modelAttribute="user">
+				<form:form class="p-3" action="/users/login" method="POST" modelAttribute="user">
 					<div class="mb-3 error">
 						<c:out value="${message}" />
 					</div>
 					<div class="mb-3">
-						<form:label class="form-label static-title" path="email">Email:</form:label>
+						<form:label class="form-label" path="email">Email:</form:label>
 						<form:input class="form-control" type="email" path="email" />
 
 					</div>
 					<div class="mb-3">
-						<form:label class="form-label static-title" path="password">Password:</form:label>
+						<form:label class="form-label" path="password">Password:</form:label>
 						<form:input class="form-control" type="password" path="password" />
 
 					</div>

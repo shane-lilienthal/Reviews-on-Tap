@@ -8,10 +8,10 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/css/style.css" />
-<title>Insert title here</title>
+<title>Reviews on Tap</title>
 </head>
 <body class="page-body">
-	<header class="pt-1 pb-1">
+	<header class="pt-2 pb-1">
 		<div
 			class="container d-flex justify-content-between align-items-center">
 			<div>
@@ -73,7 +73,7 @@
 				<div class="d-flex justify-content-center static-title mb-3">
 					<h3>All Reviews</h3>
 				</div>
-				<div class="scroll review-holder p-5">
+				<div class="scroll review-holder ps-5 pe-5 pb-5">
 					<c:forEach var="review" items="${reviews}">
 						<div class="border review-item p-3 mb-3 ms-3">
 							<div>
@@ -82,7 +82,7 @@
 							</div>
 							<div class="d-flex justify-content-start">
 								<h4>Score: ${review.score}/5</h4>
-								<img class="ms-2" id="review-img" src="/images/star.png">
+								<img class="ms-1" id="review-img" src="/images/star_icon.png">
 							</div>
 							<h4>Comments:</h4>
 							<p>${review.comments}</p>
