@@ -1,7 +1,8 @@
 package com.shanelilienthal.soloproject.controllers;
 
-
+import java.util.Comparator;
 import java.util.List;
+
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -62,6 +63,10 @@ public class BeerController {
 		}
 		
 		List<Beer> beers = service.all();
+		
+//		Sort beers alphabetically - source code from https://www.codebyamir.com/blog/sort-list-of-objects-by-field-java
+		beers.sort(Comparator.comparing(Beer::getName));
+		
 		model.addAttribute("beers", beers);
 		return "allBeers.jsp";
 	}

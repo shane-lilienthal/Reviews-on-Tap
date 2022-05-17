@@ -58,7 +58,7 @@
 				<div class="all-beers ps-3 pe-3 mb-5">
 					<c:forEach var="beer" items="${beers}">
 						<div class="d-flex justify-content-start align-items-center mb-4">
-							<img src="${beer.picture}" />
+							<img class="img-thumbnail beer-img" src="${beer.picture}" />
 							<h1>
 								<a class="beer-title ms-5" href="/beers/${beer.id}">${beer.name}</a>
 							</h1>

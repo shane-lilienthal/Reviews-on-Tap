@@ -11,7 +11,7 @@
 
 form {
 	width: 500px;
-	background: rgba(255, 255, 255, .7);
+	background: rgba(255, 255, 255, .9);
 	border-radius: 10px;
 }
 
@@ -87,10 +87,14 @@ header {
 	text-decoration: none;
 }
 
+.message {
+	color: gold;
+	text-decoration: none;
+}
 
 
 .review-item {
-	background: rgba(255, 255, 255, .7);
+	background: rgba(255, 255, 255, .9);
 	width: 100%;
 	width: 700px;
 	border-radius: 10px;
@@ -108,7 +112,7 @@ header {
 
 
 .beer-item {
-	background-color: rgba(255, 255, 255, .7);
+	background-color: rgba(255, 255, 255, .9);
 	border-radius: 10%;
 	width:400px;
 }
@@ -129,6 +133,10 @@ header {
 .beer-title-review:hover {
 	color: gold;
 }
+.beer-img {
+	height: 150px;
+	width: 150px;
+}
 .all-beers {
 	width: 700px;
 }
@@ -136,7 +144,7 @@ header {
 
 
 .user-item {
-	background-color: rgba(255, 255, 255, .7);
+	background-color: rgba(255, 255, 255, .9);
 	border-radius: 10%;
 	width: 400px;
 }

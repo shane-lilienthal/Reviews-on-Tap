@@ -48,7 +48,7 @@
 				</div>
 				<div class="border beer-item p-3">
 					<div class="d-flex justify-content-center mb-3">
-						<img class="" src="${beer.picture}" />
+						<img class="img-thumbnail beer-img" src="${beer.picture}" />
 					</div>
 					<h3 class="mb-3">Name: ${beer.name}</h3>
 					<h3 class="mb-3">Brewery: ${beer.brewery}</h3>

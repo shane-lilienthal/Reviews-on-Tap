@@ -40,7 +40,7 @@
 		</div>
 	</header>
 	<div class="container main-content">
-		<div class="d-flex justify-content-center p-3 static-title">
+		<div class="d-flex justify-content-center p-3 message">
 			<h3>
 				<c:out value="${message}" />
 			</h3>
